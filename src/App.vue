@@ -26,6 +26,22 @@ function addToCart(product) {
     product.stock -= 1; // Reduce stock by 1
   }
 }
+function removeFromCart(product) {
+  const index = cart.value.indexOf(product);
+  if (index !== -1) {
+    cart.value.splice(index, 1);
+    product.stock += 1; // Restock the product
+  }
+}
+
+function toggleCartPage() {
+  cartPage.value = !cartPage.value;
+}
+
+function validateName() {
+  const namePattern = /^[a-zA-Z\s]*$/;
+  nameError.value = !namePattern.test(customerName.value);
+}
 </script>
 
 <template>
