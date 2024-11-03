@@ -1,10 +1,10 @@
 <script setup>
 import {ref, computed} from 'vue';
 const products = ref ([
-      { id: 1, name: 'Dark Chocolate', price: 5, category: 'Dark', rating: 4.5, stock: 10, image: 'images/dark_chocolate.jpg' },
-      { id: 2, name: 'Milk Chocolate', price: 4, category: 'Milk', rating: 4.2, stock: 15, image: 'images/milk_chocolate.jpg' },
-      { id: 3, name: 'White Chocolate', price: 6, category: 'White', rating: 4.8, stock: 8, image: 'images/white_chocolate.jpg' },
-      { id: 4, name: 'Chocolate Truffle', price: 8, category: 'Gourmet', rating: 4.7, stock: 5, image: 'images/truffle.jpg' },
+      { id: 1, name: 'Dark Chocolate', price: 5, category: 'Dark', rating: 4.5, stock: 10, image: 'src/assets/images/dark_chocolate.jpg' },
+      { id: 2, name: 'Milk Chocolate', price: 4, category: 'Milk', rating: 4.2, stock: 15, image: 'src/assets/images/milk_chocolate.jpg' },
+      { id: 3, name: 'White Chocolate', price: 6, category: 'White', rating: 4.8, stock: 8, image: 'src/assets/images/white_chocolate.jpg' },
+      { id: 4, name: 'Chocolate Truffle', price: 8, category: 'Gourmet', rating: 4.7, stock: 5, image: 'src/assets/images/truffle.jpg' },
     ]);
 const cart = ref([]);
 const cartPage = ref(false);
@@ -74,7 +74,7 @@ const filteredAndSortedProducts = computed(() => {
 
 <template>
   <header class="header">
-    <img src="../images/logo.png" alt="Chocolate Boutique Logo">
+    <img src="./assets/images/logo.png" alt="Chocolate Boutique Logo">
     <h1>Welcome to the Chocolate Boutique</h1>
     <button class="btn btn-light" @click="toggleCartPage">{{ cartPage ? 'Continue Shopping' : `Cart (${cartItemCount})` }}</button>
   </header>
