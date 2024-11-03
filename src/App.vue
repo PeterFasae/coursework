@@ -54,6 +54,22 @@ function checkout() {
     cart.value = []; // Clear the cart after checkout
   }
 }
+
+const filteredAndSortedProducts = computed(() => {
+  return products.value
+    .filter(product => product.name.toLowerCase().includes(searchQuery.value.toLowerCase()))
+    .sort((a, b) => {
+      let compareA = a[sortAttribute.value];
+      let compareB = b[sortAttribute.value];
+
+      if (typeof compareA === 'string') {
+        compareA = compareA.toLowerCase();
+        compareB = compareB.toLowerCase();
+      }
+
+      return sortOrder.value === 'asc' ? (compareA > compareB ? 1 : -1) : (compareA < compareB ? 1 : -1);
+    });
+});
 </script>
 
 <template>
