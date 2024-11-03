@@ -47,6 +47,13 @@ function validatePhone() {
   const phonePattern = /^\d{11,}$/;
   phoneError.value = !phonePattern.test(customerPhone.value);
 }
+
+function checkout() {
+  if (!nameError.value && !phoneError.value) {
+    orderSubmitted.value = true;
+    cart.value = []; // Clear the cart after checkout
+  }
+}
 </script>
 
 <template>
