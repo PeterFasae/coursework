@@ -1,6 +1,31 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+import {ref, computed} from 'vue';
+const products = ref ([
+      { id: 1, name: 'Dark Chocolate', price: 5, category: 'Dark', rating: 4.5, stock: 10, image: 'images/dark_chocolate.jpg' },
+      { id: 2, name: 'Milk Chocolate', price: 4, category: 'Milk', rating: 4.2, stock: 15, image: 'images/milk_chocolate.jpg' },
+      { id: 3, name: 'White Chocolate', price: 6, category: 'White', rating: 4.8, stock: 8, image: 'images/white_chocolate.jpg' },
+      { id: 4, name: 'Chocolate Truffle', price: 8, category: 'Gourmet', rating: 4.7, stock: 5, image: 'images/truffle.jpg' },
+    ]);
+const cart = ref([]);
+const cartPage = ref(false);
+const searchQuery = ref('');
+const sortAttribute = ref('name');
+const sortOrder = ref('asc');
+const customerName = ref('');
+const customerPhone = ref('');
+const orderSubmitted =  ref(false);
+const nameError = ref(false);
+const phoneError = ref(false);
+
+const cartItemCount = computed(() => cart.value.length);
+const cartTotal = computed(() => cart.value.reduce((total, item) => total + item.price, 0).toFixed(2));
+
+function addToCart(product) {
+  if (product.stock > 0) {
+    cart.value.push(product);
+    product.stock -= 1; // Reduce stock by 1
+  }
+}
 </script>
 
 <template>
