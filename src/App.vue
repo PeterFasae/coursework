@@ -42,6 +42,11 @@ function validateName() {
   const namePattern = /^[a-zA-Z\s]*$/;
   nameError.value = !namePattern.test(customerName.value);
 }
+
+function validatePhone() {
+  const phonePattern = /^\d{11,}$/;
+  phoneError.value = !phonePattern.test(customerPhone.value);
+}
 </script>
 
 <template>
