@@ -81,31 +81,78 @@ import TheWelcome from './components/TheWelcome.vue'
 
 
 <style scoped>
-header {
-  line-height: 1.5;
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f4f4;
+  color: #333;
 }
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
+.header {
+  padding: 20px;
+  background: #5B3E31;
+  color: white;
+  text-align: center;
 }
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
+.header img {
+  max-width: 150px;
+  margin-bottom: 10px;
+}
+.product {
+  border: 1px solid #ddd;
+  background: #fff;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+}
+.product img {
+  width: 100px;
+  margin-right: 20px;
+  border-radius: 8px;
+}
+.product-info {
+  flex-grow: 1;
+}
+.price {
+  color: #E63946;
+  font-size: 20px;
+  font-weight: bold;
+}
+button {
+  background: #E63946;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+}
+button:hover {
+  background: #D62828;
+}
+.checkout-page {
+  padding: 20px;
+  max-width: 800px;
+  margin: auto;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.error-message {
+  color: #E63946;
+  font-size: 12px;
+}
+.cart-items .product {
+  flex-direction: column;
+  align-items: flex-start;
+}
+.cart-items .product button {
+  margin-top: 10px;
+}
+.cart-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
 }
 </style>
-
