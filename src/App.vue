@@ -44,7 +44,7 @@ const validateCustomerDetails = () => {
 const checkout = () => {
   if (validateCustomerDetails()) {
     orderSubmitted.value = true;
-    cart.value = [];  // Clear cart after checkout
+    cart.value = [];  
   }
 };
 
@@ -100,6 +100,7 @@ const filteredAndSortedLessons = computed(() => {
               <p class="price">£{{ lesson.price.toFixed(2) }}</p>
             </div>
             <p>Rating: {{ lesson.rating }}</p>
+            <p>Location: {{ lesson.location }}</p>
             <button class="btn btn-danger" @click="addToCart(lesson)" :disabled="!lesson.slots">
               Enroll ({{ lesson.slots }} left)
             </button>
