@@ -11,11 +11,9 @@ const customerDetails = ref({ name: '', phone: '' });
 const validationErrors = ref({ name: false, phone: false });
 const orderSubmitted = ref(false);
 
-// Computed properties
 const cartItemCount = computed(() => cart.value.length);
 const cartTotal = computed(() => cart.value.reduce((total, lesson) => total + lesson.price, 0).toFixed(2));
 
-// Functions
 const addToCart = (lesson) => {
   if (lesson.slots > 0) {
     cart.value.push(lesson);
@@ -32,7 +30,9 @@ const removeFromCart = (lesson) => {
 };
 
 const toggleCartView = () => {
-  showCart.value = !showCart.value;
+  if (cart.value.length > 0) {  // Only toggle if there's an item in the cart
+    showCart.value = !showCart.value;
+  }
 };
 
 const validateCustomerDetails = () => {
@@ -135,7 +135,7 @@ const filteredAndSortedLessons = computed(() => {
 
     <div class="cart-actions">
       <p><strong>Total:</strong> £{{ cartTotal }}</p>
-      <button class="btn btn-success" @click="checkout" :disabled="cart.length === 0 || validationErrors.name || validationErrors.phone">Checkout</button>
+      <button class="btn btn-success" @click="checkout" :disabled="cartItemCount < 1 || validationErrors.name || validationErrors.phone">Checkout</button>
     </div>
 
     <p v-if="orderSubmitted" class="success-message">Your order has been placed!</p>
