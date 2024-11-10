@@ -1,12 +1,12 @@
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, computed, } from 'vue';
 import { lessons as lessonData } from './lessons.js'; 
 
 const lessons = ref(lessonData);
 const cart = ref([]);
 const showCart = ref(false);
 const searchQuery = ref('');
-const sortOption = ref({ attribute: 'title', order: 'asc' });
+const sortOption = ref({ attribute: 'subject', order: 'asc' });
 const customerDetails = ref({ name: '', phone: '' });
 const validationErrors = ref({ name: false, phone: false });
 const orderSubmitted = ref(false);
@@ -30,7 +30,7 @@ const removeFromCart = (lesson) => {
 };
 
 const toggleCartView = () => {
-  if (cart.value.length > 0) {  // Only toggle if there's an item in the cart
+  if (cart.value.length > 0) {  
     showCart.value = !showCart.value;
   }
 };
@@ -77,9 +77,11 @@ const filteredAndSortedLessons = computed(() => {
     <div class="row mb-4">
       <div class="col">
         <select class="form-control" v-model="sortOption.attribute">
-          <option value="title">Title</option>
+          <option value="subject">Subject</option>
           <option value="price">Price</option>
           <option value="rating">Rating</option>
+          <option value="location">Location</option>
+          <option value="slots">Slots</option>
         </select>
       </div>
       <div class="col">
