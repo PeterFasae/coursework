@@ -50,7 +50,7 @@ const checkout = () => {
 
 const filteredAndSortedLessons = computed(() => {
   return lessons.value
-    .filter(lesson => lesson.title.toLowerCase().includes(searchQuery.value.toLowerCase()))
+    .filter(lesson => lesson.subject.toLowerCase().includes(searchQuery.value.toLowerCase()))
     .sort((a, b) => {
       let valueA = a[sortOption.value.attribute];
       let valueB = b[sortOption.value.attribute];
@@ -95,10 +95,10 @@ const filteredAndSortedLessons = computed(() => {
     <div class="row">
       <div class="col-md-4 lesson" v-for="lesson in filteredAndSortedLessons" :key="lesson.id">
         <div class="card mb-4">
-          <img :src="lesson.image" class="card-img-top" :alt="`${lesson.title} image`" />
+          <img :src="lesson.image" class="card-img-top" :alt="`${lesson.subject} image`" />
           <div class="card-body">
             <div class="d-flex justify-content-between align-items-center">
-              <h5 class="card-title">{{ lesson.title }} ({{ lesson.category }})</h5>
+              <h5 class="card-subject">{{ lesson.subject }} ({{ lesson.category }})</h5>
               <p class="price">£{{ lesson.price.toFixed(2) }}</p>
             </div>
             <p>Rating: {{ lesson.rating }}</p>
@@ -116,10 +116,10 @@ const filteredAndSortedLessons = computed(() => {
     <h2>Your Enrollments</h2>
     <div class="cart-items">
       <div v-for="lesson in cart" :key="lesson.id" class="lesson">
-        <img :src="lesson.image" :alt="`${lesson.title} image`" />
+        <img :src="lesson.image" :alt="`${lesson.subject} image`" />
         <div class="lesson-info">
           <div class="d-flex justify-content-between align-items-center">
-            <p>{{ lesson.title }}</p>
+            <p>{{ lesson.subject }}</p>
             <p class="price">£{{ lesson.price.toFixed(2) }}</p>
           </div>
           <button class="btn btn-warning" @click="removeFromCart(lesson)">Remove</button>
