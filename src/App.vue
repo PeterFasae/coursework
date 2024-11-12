@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, } from 'vue';
+import { ref, computed, reactive } from 'vue';
 import { lessons as lessonData } from './lessons.js'; 
 
 const lessons = ref(lessonData);
@@ -7,8 +7,8 @@ const cart = ref([]);
 const showCart = ref(false);
 const searchQuery = ref('');
 const sortOption = ref({ attribute: 'subject', order: 'asc' });
-const customerDetails = ref({ name: '', phone: '' });
-const validationErrors = ref({ name: false, phone: false });
+const customerDetails = reactive({ name: '', phone: '' });
+const validationErrors = reactive({ name: false, phone: false });
 const orderSubmitted = ref(false);
 
 const cartItemCount = computed(() => cart.value.length);
@@ -36,12 +36,17 @@ const toggleCartView = () => {
 };
 
 const validateCustomerDetails = () => {
-  validationErrors.value.name = !/^[a-zA-Z\s]+$/.test(customerDetails.value.name);
-  validationErrors.value.phone = !/^\d{11,}$/.test(customerDetails.value.phone);
-  return !validationErrors.value.name && !validationErrors.value.phone;
+  console.log( customerDetails.name, customerDetails.phone)
+  validationErrors.name = !/^[a-zA-Z\s]+$/.test(customerDetails.name);
+  validationErrors.phone = !/^\d{11,}$/.test(customerDetails.phone);
+  return !validationErrors.name && !validationErrors.phone;
 };
 
 const checkout = () => {
+  console.log( customerDetails.name, customerDetails.phone)
+  validationErrors.name = !/^[a-zA-Z\s]+$/.test(customerDetails.name);
+  validationErrors.phone = !/^\d{11,}$/.test(customerDetails.phone);
+  const isValidated =  !validationErrors.name && !validationErrors.phone; 
   if (validateCustomerDetails()) {
     orderSubmitted.value = true;
     cart.value = [];  
@@ -130,6 +135,7 @@ const filteredAndSortedLessons = computed(() => {
     <div class="checkout-inputs">
       <input type="text" class="form-control mb-2" v-model="customerDetails.name" placeholder="Enter your name">
       <input type="tel" class="form-control mb-2" v-model="customerDetails.phone" placeholder="Enter your phone number">
+
     </div>
 
     <span class="error-message" v-if="validationErrors.name">Only letters allowed for the name.</span>
