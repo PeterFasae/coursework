@@ -1,6 +1,8 @@
 <script setup>
-import { ref, computed, reactive } from 'vue';
-import { lessons as lessonData } from './lessons.js'; 
+import { ref, computed, reactive, watch } from 'vue';
+import { lessons as lessonData } from './lessons.js';
+import './styles.css';
+
 
 const lessons = ref(lessonData);
 const cart = ref([]);
@@ -30,23 +32,29 @@ const removeFromCart = (lesson) => {
 };
 
 const toggleCartView = () => {
-  if (cart.value.length > 0) {  
-    showCart.value = !showCart.value;
+  if (showCart.value) {
+    showCart.value = false;
+  } else if (cart.value.length > 0) {
+    showCart.value = true;
   }
 };
 
 const validateCustomerDetails = () => {
-  console.log( customerDetails.name, customerDetails.phone)
   validationErrors.name = !/^[a-zA-Z\s]+$/.test(customerDetails.name);
   validationErrors.phone = !/^\d{11,}$/.test(customerDetails.phone);
+  console.log("Validation - Name:", validationErrors.name, "Phone:", validationErrors.phone);
   return !validationErrors.name && !validationErrors.phone;
 };
 
-const checkout = () => {
-  console.log( customerDetails.name, customerDetails.phone)
+watch(() => customerDetails.name, () => {
   validationErrors.name = !/^[a-zA-Z\s]+$/.test(customerDetails.name);
+});
+
+watch(() => customerDetails.phone, () => {
   validationErrors.phone = !/^\d{11,}$/.test(customerDetails.phone);
-  const isValidated =  !validationErrors.name && !validationErrors.phone; 
+});
+
+const checkout = () => {
   if (validateCustomerDetails()) {
     orderSubmitted.value = true;
     cart.value = [];  
@@ -74,7 +82,10 @@ const filteredAndSortedLessons = computed(() => {
   <header class="header">
     <img src="./assets/images/lesson_logo.jpg" alt="Lessons Marketplace Logo">
     <h1>Welcome to the Lessons Marketplace</h1>
-    <button class="btn btn-light" @click="toggleCartView">{{ showCart ? 'Continue Browsing' : `Cart (${cartItemCount})` }}</button>
+    <button class="btn btn-light" @click="toggleCartView">
+  {{ showCart ? 'Continue Browsing' : `Cart (${cartItemCount})` }}
+</button>
+
   </header>
 
   <div class="container my-4" v-if="!showCart">
@@ -149,80 +160,3 @@ const filteredAndSortedLessons = computed(() => {
     <p v-if="orderSubmitted" class="success-message">Your order has been placed!</p>
   </div>
 </template>
-
-<style scoped>
-body {
-  font-family: Arial, sans-serif;
-  background: #f9f9f9;
-  color: #333;
-}
-.header {
-  padding: 20px;
-  background: #4B5563;
-  color: white;
-  text-align: center;
-}
-.header img {
-  max-width: 150px;
-  margin-bottom: 10px;
-}
-.lesson {
-  border: 1px solid #ddd;
-  background: #fff;
-  padding: 10px;
-  margin: 10px 0;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-}
-.lesson img {
-  width: 100px;
-  margin-right: 20px;
-  border-radius: 8px;
-}
-.lesson-info {
-  flex-grow: 1;
-}
-.price {
-  color: #1F2937;
-  font-size: 20px;
-  font-weight: bold;
-}
-button {
-  background: #1F2937;
-  color: white;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 5px;
-  font-size: 14px;
-  cursor: pointer;
-}
-button:hover {
-  background: #111827;
-}
-.checkout-page {
-  padding: 20px;
-  max-width: 800px;
-  margin: auto;
-  background: white;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-.error-message {
-  color: #E63946;
-  font-size: 12px;
-}
-.cart-items .lesson {
-  flex-direction: column;
-  align-items: flex-start;
-}
-.cart-items .lesson button {
-  margin-top: 10px;
-}
-.cart-actions {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 20px;
-}
-</style>
