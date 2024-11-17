@@ -3,7 +3,6 @@ import { ref, computed, reactive, watch } from 'vue';
 import { lessons as lessonData } from './lessons.js';
 import './styles.css';
 
-
 const lessons = ref(lessonData);
 const cart = ref([]);
 const showCart = ref(false);
@@ -95,7 +94,6 @@ const filteredAndSortedLessons = computed(() => {
         <select class="form-control" v-model="sortOption.attribute">
           <option value="subject">Subject</option>
           <option value="price">Price</option>
-          <option value="rating">Rating</option>
           <option value="location">Location</option>
           <option value="slots">Slots</option>
         </select>
@@ -117,7 +115,6 @@ const filteredAndSortedLessons = computed(() => {
               <h5 class="card-subject">{{ lesson.subject }} ({{ lesson.category }})</h5>
               <p class="price">£{{ lesson.price.toFixed(2) }}</p>
             </div>
-            <p>Rating: {{ lesson.rating }}</p>
             <p>Location: {{ lesson.location }}</p>
             <button class="btn btn-danger" @click="addToCart(lesson)" :disabled="!lesson.slots">
               Enroll ({{ lesson.slots }} left)
