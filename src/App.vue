@@ -81,7 +81,7 @@ const filteredAndSortedLessons = computed(() => {
   <header class="header">
     <img src="./assets/images/lesson_logo.jpg" alt="Lessons Marketplace Logo">
     <h1>Welcome to the Lessons Marketplace</h1>
-    <button class="btn btn-light" @click="toggleCartView">
+    <button :class="cartItemCount ? 'button-active' : 'button-disabled'" @click="toggleCartView">
   {{ showCart ? 'Continue Browsing' : `Cart (${cartItemCount})` }}
 </button>
 

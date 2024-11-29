@@ -51,9 +51,41 @@ button {
   cursor: pointer;
   transition: background 0.3s ease;
 }
+.button-active {
+  background: #1F2937;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+.button-disabled {
+  background: #f9fafa;
+  color: rgb(113, 113, 240);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
 button:hover {
   background: #111827;
 }
+button:active {
+  transform: scale(0.95); 
+  background: #374151;
+}
+
+button:focus {
+  outline: 2px solid #2563EB; 
+  outline-offset: 2px;
+}
+
 
 .checkout-page {
   padding: 20px;
