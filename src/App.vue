@@ -125,6 +125,8 @@ const submitForm = async () => {
 //     });
 // });
 
+
+// search function
 const filteredAndSortedLessons = computed(() => {
   return lessons.value
     .filter(lesson => {
