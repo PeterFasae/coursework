@@ -124,6 +124,7 @@ const submitForm = async () => {
 //       return sortOption.value.order === 'asc' ? (valueA > valueB ? 1 : -1) : (valueA < valueB ? 1 : -1);
 //     });
 // });
+
 const filteredAndSortedLessons = computed(() => {
   return lessons.value
     .filter(lesson => {
