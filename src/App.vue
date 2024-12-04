@@ -99,6 +99,7 @@ const submitForm = async () => {
     console.error(error);
   } finally {
     isSubmitting.value = false;
+    showCart.value = false;
   }
 };
 
